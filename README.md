@@ -1,18 +1,48 @@
 # LimeSurvey_API_JavaScript_Template
 
-## LimeSurvey RC2 API Example
+##LimeSurvey RC2 API Example
 
-This example demonstrates how to authenticate with the LimeSurvey RemoteControl2 API (LSRC2) and make a sample API request using JavaScript in a web environment. This can serve as a starting point for integrating LimeSurvey's API into your applications.
+This example demonstrates how to use LimeSurvey's RemoteControl2 API (LSRC2) in various ways, including through a web page and using Postman. Additionally, it provides instructions for unlocking CORS with the [Access-Control](https://webextension.org/listing/access-control.html) browser extension and configuring CORS on an Apache server.
 
 ## Prerequisites
 
 - [LimeSurvey](https://www.limesurvey.org/) installed with RemoteControl2 API enabled.
+- Apache server installed (for server-side CORS configuration).
+- [Postman](https://www.postman.com/) installed for API testing.
 
 ## Usage
 
 1. Open the `index.html` file in a web browser.
 2. Modify the `apiUrl`, `username`, and `password` variables in the script to match your LimeSurvey instance.
 3. Run the HTML file in a secure environment (e.g., on a web server or using a tool like [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for VSCode).
+
+## Unlocking CORS with Access-Control Extension
+
+1. Install the [Access-Control](https://webextension.org/listing/access-control.html) browser extension.
+2. After installation, click on the extension icon in your browser.
+3. Add your LimeSurvey domain to the extension's whitelist to allow cross-origin requests.
+
+## Configuring CORS on Apache Server
+
+If you're running the HTML file on an Apache server and facing CORS issues, you can modify the server configuration to allow cross-origin requests.
+
+### Steps to Modify Apache Configuration
+
+1. Open the Apache configuration file (`httpd.conf`).
+2. Locate the `<Directory>` or `<Location>` block that corresponds to your LimeSurvey directory.
+3. Add the following lines to enable CORS:
+
+```apache
+<Directory "/path/to/limesurvey">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Headers "Content-Type"
+    Header set Access-Control-Allow-Methods "POST, GET, OPTIONS"
+</Directory>
+```
+
+Replace `/path/to/limesurvey` with the actual path to your LimeSurvey directory.
+
+4. Save the configuration file and restart the Apache server.
 
 ## Steps
 
@@ -33,8 +63,33 @@ const surveyId = 853721;  // Replace with your survey ID
 const sampleRequest = await makeSampleRequest(sessionKey, surveyId);
 ```
 
-## Note
+### Using Postman
 
-- Ensure that LimeSurvey's CORS (Cross-Origin Resource Sharing) settings allow requests from the origin where the HTML file is hosted.
-- Customize the script according to your specific use case and API endpoints.
+1. Open Postman and create a new request.
+2. Set the request method to `POST`.
+3. Enter the API endpoint: `https://alegalschi.limesurvey.net/index.php/admin/remotecontrol`.
+4. Go to the "Body" tab and select "raw." Paste the following JSON:
 
+```json
+{
+  "method": "get_session_key",
+  "params": ["AleGalSchi", "@Alejos1234@", "Authdb"],
+  "id": 1
+}
+```
+
+5. Click "Send" to make the request.
+
+### Expected Status and Response
+
+For the `get_session_key` request, you should receive a response similar to:
+
+```json
+{
+  "id": 1,
+  "result": "3qiJZo_7tulT5ZG3vCiVjIpzdHLCwg~H",
+  "error": null
+}
+```
+
+Feel free to explore and expand upon this example to integrate LimeSurvey's API functionalities into your applications.
