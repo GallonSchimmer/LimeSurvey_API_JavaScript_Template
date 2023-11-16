@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LimeSurvey RC2 API Example</title>
+</head>
+<body>
+
+<script>
+    // LimeSurvey RC2 API endpoint
+    const apiUrl = 'https://alegalschi.limesurvey.net/index.php/admin/remotecontrol';
+	
+    let sessionKey = "";
+
+    // Function to authenticate and obtain a session key
+    async function authenticateAndRequest() {
+        const username = 'AleGalSchi';
+        const password = '@Alejos1234@';
+
+        try {
+            // Step 1: Get Session Key
+            const sessionKey = await getSessionKey(username, password);
+            console.log('Session Key:', sessionKey);
+
+            // Step 2: Make a sample API request (adjust the method and parameters)
+            const sampleRequest = await makeSampleRequest(sessionKey);
+            console.log('Sample Request Result:', sampleRequest);
+        } catch (error) {
+            console.error('Error in authenticateAndRequest:', error);
+        }
+    }
+
+    // Function to get a session key
+    async function getSessionKey(username, password) {
+        try {
+            const paramsGetSessionKey = {
+                method: "get_session_key",
+                params: [username, password],
+                id: 1,
+            };
+
+            const optionsGetSessionKey = {
+                method: "POST",
+                body: JSON.stringify(paramsGetSessionKey),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Connection': 'Keep-Alive',
+                    'Host': 'surveys.ak.tu-berlin.de',
+                    'User-Agent': 'Apache-HttpClient/4.2.2 (java 1.5)',
+                },
+            };
+
+            const response = await fetch(apiUrl, optionsGetSessionKey);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            // Log the raw response for debugging
+            // console.log('Raw Response:', await response.text());
+            return data.result;
+        } catch (error) {
+            console.error('Error in getSessionKey:', error);
+            throw error; // Re-throw the error to propagate it to the caller
+        }
+    }
+
+    // Function to make a sample API request
+    async function makeSampleRequest(sessionKey) {
+        try {
+            const surveyId = 853721;  // Replace with your survey ID
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Connection': 'Keep-Alive',
+                    'Host': 'surveys.ak.tu-berlin.de',
+                    'User-Agent': 'Apache-HttpClient/4.2.2 (java 1.5)',
+                },
+                body: JSON.stringify({
+                    method: 'get_survey_properties',
+                    params: [sessionKey, surveyId],
+                    id: 2,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            // Log the raw response for debugging
+            // console.log('Raw Response:', await response.text());
+            return data.result;
+        } catch (error) {
+            console.error('Error in makeSampleRequest:', error);
+            throw error; // Re-throw the error to propagate it to the caller
+        }
+    }
+
+    // Call the authentication and request function
+    authenticateAndRequest();
+</script>
+
+</body>
+</html>
