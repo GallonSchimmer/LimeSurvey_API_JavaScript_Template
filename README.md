@@ -53,6 +53,7 @@ The `get_session_key` function is used to obtain a session key. Replace `usernam
 ```javascript
 const sessionKey = await getSessionKey(username, password);
 ```
+https://manual.limesurvey.org/RemoteControl_2_API
 
 ### 2. Make a Sample API Request
 
@@ -62,6 +63,8 @@ Adjust the `makeSampleRequest` function to perform the desired API request. In t
 const surveyId = 853721;  // Replace with your survey ID
 const sampleRequest = await makeSampleRequest(sessionKey, surveyId);
 ```
+![image](https://github.com/GallonSchimmer/LimeSurvey_API_JavaScript_Template/assets/26065891/8ae7c30c-6923-4ad9-afa4-662136a9bcbf)
+
 
 ### Using Postman
 
@@ -73,7 +76,7 @@ const sampleRequest = await makeSampleRequest(sessionKey, surveyId);
 ```json
 {
   "method": "get_session_key",
-  "params": ["AleGalSchi", "@Alejos1234@", "Authdb"],
+  "params": ["username", "password", "Authdb"],
   "id": 1
 }
 ```
@@ -91,6 +94,7 @@ For the `get_session_key` request, you should receive a response similar to:
   "error": null
 }
 ```
+![image](https://github.com/GallonSchimmer/LimeSurvey_API_JavaScript_Template/assets/26065891/5687a796-de01-42b3-97fe-d61339575f1f)
 
 ## Documentation:
 
