@@ -92,4 +92,72 @@ For the `get_session_key` request, you should receive a response similar to:
 }
 ```
 
-Feel free to explore and expand upon this example to integrate LimeSurvey's API functionalities into your applications.
+## Documentation:
+
+// Function to get a session key using the LimeSurvey RemoteControl2 API
+async function getSessionKey(username, password) {
+    try {
+        // Define parameters for the get_session_key method
+        const paramsGetSessionKey = {
+            method: "get_session_key",
+            params: [username, password],
+            id: 1,
+        };
+
+        // Set up options for the fetch request
+        const optionsGetSessionKey = {
+            method: "POST",
+            body: JSON.stringify(paramsGetSessionKey),
+            headers: {
+                'Content-Type': 'application/json',
+                'Connection': 'Keep-Alive',
+                'Host': 'surveys.ak.tu-berlin.de',
+                'User-Agent': 'Apache-HttpClient/4.2.2 (java 1.5)',
+            },
+        };
+
+        // Make a fetch request to the LimeSurvey API endpoint to get the session key
+        const response = await fetch(apiUrl, optionsGetSessionKey);
+
+        // Check if the response is successful; otherwise, throw an error
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Parse the JSON response
+        const data = await response.json();
+
+        // Log the raw response for debugging (commented out by default)
+        // console.log('Raw Response:', await response.text());
+
+        // Return the obtained session key
+        return data.result;
+    } catch (error) {
+        // Log and re-throw any errors that occur during the process
+        console.error('Error in getSessionKey:', error);
+        throw error; // Re-throw the error to propagate it to the caller
+    }
+}
+
+
+This function, getSessionKey, is responsible for obtaining a session key from the LimeSurvey RemoteControl2 API using the get_session_key method. Here's a breakdown of the key components:
+
+    Parameters:
+        username: The LimeSurvey username used for authentication.
+        password: The LimeSurvey password associated with the given username.
+
+    API Request Setup:
+        The paramsGetSessionKey object is constructed with the necessary parameters for the get_session_key method, including the username, password, and request ID.
+        The optionsGetSessionKey object is set up with the method, body (containing the JSON-RPC parameters), and headers required for a LimeSurvey API request.
+
+    Fetch Request:
+        A fetch request is made to the LimeSurvey API endpoint (apiUrl) using the configured options.
+
+    Response Handling:
+        If the response status is not OK (200), an error is thrown with details about the HTTP error.
+        The JSON response is parsed, and the obtained session key is extracted from the response data.
+
+    Error Handling:
+        Any errors that occur during the process are logged, and the error is re-thrown to propagate it to the caller.
+
+This function provides a modular and asynchronous way to authenticate with LimeSurvey, ensuring proper error handling and logging for debugging purposes.
