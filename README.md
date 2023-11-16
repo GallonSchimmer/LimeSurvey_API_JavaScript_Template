@@ -94,6 +94,7 @@ For the `get_session_key` request, you should receive a response similar to:
 
 ## Documentation:
 
+```javascript
 // Function to get a session key using the LimeSurvey RemoteControl2 API
 async function getSessionKey(username, password) {
     try {
@@ -139,7 +140,7 @@ async function getSessionKey(username, password) {
     }
 }
 
-
+```
 This function, getSessionKey, is responsible for obtaining a session key from the LimeSurvey RemoteControl2 API using the get_session_key method. Here's a breakdown of the key components:
 
     Parameters:
