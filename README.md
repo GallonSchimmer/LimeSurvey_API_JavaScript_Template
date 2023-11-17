@@ -28,22 +28,21 @@ If you're running the HTML file on an Apache server and facing CORS issues, you 
 
 ### Steps to Modify Apache Configuration
 
-1. Open the Apache configuration file (`httpd.conf`).
-2. Locate the `<Directory>` or `<Location>` block that corresponds to your LimeSurvey directory.
-3. Add the following lines to enable CORS:
+## Apache CORS Configuration
+
+If you encounter CORS issues, you may need to configure your Apache HTTP server to allow cross-origin resource sharing. Add the following lines to your Apache configuration:
 
 ```apache
-<Directory "/path/to/limesurvey">
+<IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin "*"
-    Header set Access-Control-Allow-Headers "Content-Type"
-    Header set Access-Control-Allow-Methods "POST, GET, OPTIONS"
-</Directory>
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    Header always set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
 ```
+## Using Apache with CORS Unlock Tool
 
-Replace `/path/to/limesurvey` with the actual path to your LimeSurvey directory.
-
-4. Save the configuration file and restart the Apache server.
-
+To unlock CORS for your LimeSurvey instance, you can also use the Access-Control-Allow-Origin tool. Follow the tool's documentation to set up and configure it for your environment.
 ## Steps
 
 ### 1. Get Session Key
