@@ -62,7 +62,6 @@ Adjust the `makeSampleRequest` function to perform the desired API request. In t
 const surveyId = 853721;  // Replace with your survey ID
 const sampleRequest = await makeSampleRequest(sessionKey, surveyId);
 ```
-[image](https://github.com/GallonSchimmer/LimeSurvey_API_JavaScript_Template/assets/26065891/8ae7c30c-6923-4ad9-afa4-662136a9bcbf)
 
 
 ### Using Postman
@@ -93,7 +92,6 @@ For the `get_session_key` request, you should receive a response similar to:
   "error": null
 }
 ```
-[image](https://github.com/GallonSchimmer/LimeSurvey_API_JavaScript_Template/assets/26065891/5687a796-de01-42b3-97fe-d61339575f1f)
 
 ## Documentation:
 
