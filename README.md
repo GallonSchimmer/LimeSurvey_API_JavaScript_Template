@@ -163,3 +163,100 @@ This function, getSessionKey, is responsible for obtaining a session key from th
         Any errors that occur during the process are logged, and the error is re-thrown to propagate it to the caller.
 
 This function provides a modular and asynchronous way to authenticate with LimeSurvey, ensuring proper error handling and logging for debugging purposes.
+
+**Updated Sample Request Result and Explanation:**
+
+```json
+{
+    "sid": "853721",
+    "owner_id": "1",
+    "gsid": "1",
+    "admin": "inherit",
+    "active": "Y",
+    "expires": null,
+    "startdate": null,
+    "adminemail": "inherit",
+    "anonymized": "N",
+    "format": "S",
+    "savetimings": "Y",
+    "template": "inherit",
+    "language": "en",
+    "additional_languages": "de",
+    "datestamp": "Y",
+    "usecookie": "I",
+    "allowregister": "I",
+    "allowsave": "I",
+    "autonumber_start": "1",
+    "autoredirect": "Y",
+    "allowprev": "I",
+    "printanswers": "I",
+    "ipaddr": "Y",
+    "ipanonymize": "N",
+    "refurl": "Y",
+    "datecreated": "2023-11-13 12:56:54",
+    "showsurveypolicynotice": "0",
+    "publicstatistics": "I",
+    "showdatapolicybutton": "0",
+    "showlegalnoticebutton": "0",
+    "publicgraphs": "I",
+    "listpublic": "I",
+    "htmlemail": "I",
+    "sendconfirmation": "I",
+    "tokenanswerspersistence": "I",
+    "assessments": "I",
+    "usecaptcha": "E",
+    "usetokens": "N",
+    "bounce_email": "inherit",
+    "attributedescriptions": null,
+    "emailresponseto": "inherit",
+    "emailnotificationto": "inherit",
+    "tokenlength": "-1",
+    "showxquestions": "N",
+    "showgroupinfo": "I",
+    "shownoanswer": "I",
+    "showqnumcode": "I",
+    "bouncetime": null,
+    "bounceprocessing": "N",
+    "bounceaccounttype": null,
+    "bounceaccounthost": null,
+    "bounceaccountpass": null,
+    "bounceaccountencryption": null,
+    "bounceaccountuser": null,
+    "showwelcome": "Y",
+    "showprogress": "Y",
+    "questionindex": "-1",
+    "navigationdelay": "-1",
+    "nokeyboard": "I",
+    "alloweditaftercompletion": "I",
+    "googleanalyticsstyle": null,
+    "googleanalyticsapikey": null,
+    "tokenencryptionoptions": "{ \"enabled\":\"Y\",\"columns\":{ \"firstname\":\"N\",\"lastname\":\"N\",\"email\":\"N\" } }"
+}
+```
+
+
+
+- The `Sample Request Result` represents the properties of the LimeSurvey with Survey ID 853721 retrieved through a sample API request.
+- Below are key properties and their values:
+  - `sid`: Survey ID is "853721".
+  - `owner_id`: Owner ID is "1".
+  - `gsid`: GSID is "1".
+  - `admin`: Admin settings are "inherit".
+  - `active`: Survey is "active" (Y).
+  - `expires`: Survey expiration is not set (null).
+  - `startdate`: Survey start date is not set (null).
+  - `adminemail`: Admin email settings are "inherit".
+  - ... (and many more survey properties).
+
+- Date-related properties:
+  - `datecreated`: Survey creation date is "2023-11-13 12:56:54".
+  - `expires`: Expiration date is not set (null).
+  - `startdate`: Start date is not set (null).
+  - `bouncetime`: Bounce time is not set (null).
+
+- Other notable settings:
+  - `language`: Survey language is "en".
+  - `additional_languages`: Additional languages include "de".
+  - `tokenencryptionoptions`: Token encryption is enabled with specific column settings.
+
+- The response provides a comprehensive overview of the survey's configuration and settings. Refer to LimeSurvey documentation for details on each property.
